@@ -3,6 +3,8 @@ package com.financeiro.course.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -14,6 +16,10 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Transient //não será mapeado no banco de dados
+    private Set<Product> products = new HashSet<>();//Set é uma interface não pode ser instanciada
+    //HashSet é uma implementação da interface Set
 
     public Category() {
     }
@@ -38,6 +44,10 @@ public class Category implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     @Override
