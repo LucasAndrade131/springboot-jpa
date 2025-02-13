@@ -20,9 +20,20 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient //não será mapeado no banco de dados
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();//Set é uma interface não pode ser instanciada
     //HashSet é uma implementação da interface Set
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 
     public Product() {
     }
