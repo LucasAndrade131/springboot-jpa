@@ -1,5 +1,6 @@
 package com.financeiro.course.entities.pk;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.financeiro.course.entities.Order;
 import com.financeiro.course.entities.Product;
 import jakarta.persistence.Embeddable;
@@ -21,6 +22,7 @@ public class OrderItemPK implements Serializable {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @JsonIgnore
     public Order getOrder() {
         return order;
     }

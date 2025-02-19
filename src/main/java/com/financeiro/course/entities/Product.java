@@ -1,5 +1,6 @@
 package com.financeiro.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -27,6 +28,9 @@ public class Product implements Serializable {
     private Set<Category> categories = new HashSet<>();//Set é uma interface não pode ser instanciada
     //HashSet é uma implementação da interface Set
 
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
+
     public Set<Category> getCategories() {
         return categories;
     }
@@ -35,7 +39,28 @@ public class Product implements Serializable {
         this.categories = categories;
     }
 
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for (OrderItem x : items) {
+            set.add(x.getOrder());
+        }
+        return set;
+    }
+
     public Product() {
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof Product product)) return false;
+
+        return id.equals(product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
     public Product(Long id, String name, String description, Double price, String imgUrl) {
