@@ -2,8 +2,11 @@ package com.financeiro.course.services;
 
 import com.financeiro.course.entities.User;
 import com.financeiro.course.repositories.UserRepository;
+import com.financeiro.course.services.exceptions.DatabaseException;
 import com.financeiro.course.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +31,14 @@ public class UserService {
         return repository.save(obj);
     }
 
-    public void delete(Long obj) {
-        repository.deleteById(obj);
+    public void delete(Long id) {
+        try{
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public User update(Long id, User obj) {
