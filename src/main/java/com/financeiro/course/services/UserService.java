@@ -34,6 +34,10 @@ public class UserService {
 
     public void delete(Long id) {
         try {
+            if (!repository.existsById(id)) {
+                System.out.println("Id not found: " + id);
+                throw new ResourceNotFoundException(id);
+            }
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException(id);
