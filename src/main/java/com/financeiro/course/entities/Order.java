@@ -3,6 +3,7 @@ package com.financeiro.course.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.financeiro.course.entities.enums.OrderStatus;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -10,6 +11,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
@@ -22,6 +26,8 @@ public class Order implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
     private Integer orderStatus;
 
     @ManyToOne
@@ -36,32 +42,11 @@ public class Order implements Serializable {
     // cascade = CascadeType.ALL: se der certo a operação de salvar o pedido, também salva o pagamento
     private Payment payment;
 
-    public Order() {
-    }
-
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
-        super();
         this.id = id;
         this.moment = moment;
         setOrderStatus(orderStatus);
         this.client = client;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Instant getMoment() {
-        return moment;
-    }
-
-    public void setMoment(Instant moment) {
-        this.moment = moment;
     }
 
     public OrderStatus getOrderStatus() {
@@ -69,28 +54,9 @@ public class Order implements Serializable {
     }
 
     public void setOrderStatus(OrderStatus orderStatus) {
-        if (Objects.nonNull(orderStatus))
-        this.orderStatus = orderStatus.getCode();
-    }
-
-    public User getClient() {
-        return client;
-    }
-
-    public void setClient(User client) {
-        this.client = client;
-    }
-
-    public Set<OrderItem> getItems() {
-        return items;
-    }
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+        if (Objects.nonNull(orderStatus)) {
+            this.orderStatus = orderStatus.getCode();
+        }
     }
 
     public Double getTotal() {
