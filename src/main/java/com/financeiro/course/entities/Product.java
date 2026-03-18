@@ -32,6 +32,7 @@ public class Product implements Serializable {
     private Set<Category> categories = new HashSet<>();//Set é uma interface não pode ser instanciada
     //HashSet é uma implementação da interface Set
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItem> items = new HashSet<>();
 
