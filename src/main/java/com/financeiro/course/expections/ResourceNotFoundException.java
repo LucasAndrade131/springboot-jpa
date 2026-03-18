@@ -1,4 +1,4 @@
-package com.financeiro.course.services.exceptions;
+package com.financeiro.course.expections;
 
 public class ResourceNotFoundException extends RuntimeException {
 
