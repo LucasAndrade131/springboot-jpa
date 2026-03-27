@@ -22,4 +22,8 @@ public class ProductService {
         Optional<Product> obj = repository.findById(id);
         return obj.get();
     }
+
+    public List<Product> findByPriceGreaterThan(Double value) {
+        return repository.findByPriceGreaterThan(value);
+    }
 }

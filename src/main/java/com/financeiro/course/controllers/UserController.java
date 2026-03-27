@@ -1,4 +1,4 @@
-package com.financeiro.course.resources;
+package com.financeiro.course.controllers;
 
 import com.financeiro.course.entities.User;
 import com.financeiro.course.services.UserService;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/users")
-public class UserResource {
+public class UserController {
 
     @Autowired
     private UserService service;

@@ -1,4 +1,4 @@
-package com.financeiro.course.resources.exceptions;
+package com.financeiro.course.expections;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

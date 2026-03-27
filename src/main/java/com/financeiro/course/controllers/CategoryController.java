@@ -1,4 +1,4 @@
-package com.financeiro.course.resources;
+package com.financeiro.course.controllers;
 
 import com.financeiro.course.entities.Category;
 import com.financeiro.course.services.CategoryService;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/categories")
-public class CategoryResource {
+public class CategoryController {
 
     @Autowired
     private CategoryService service;

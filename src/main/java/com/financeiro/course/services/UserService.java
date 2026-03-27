@@ -2,8 +2,8 @@ package com.financeiro.course.services;
 
 import com.financeiro.course.entities.User;
 import com.financeiro.course.repositories.UserRepository;
-import com.financeiro.course.services.exceptions.DatabaseException;
-import com.financeiro.course.services.exceptions.ResourceNotFoundException;
+import com.financeiro.course.expections.DatabaseException;
+import com.financeiro.course.expections.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
